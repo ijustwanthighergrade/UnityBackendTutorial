@@ -3,6 +3,7 @@
     $username = "root";
     $password = "1234";
     $dbname="tictagtoe"; 
+    //新增 private hashtag
 
     //variables user input
     $user=$_POST["username"];

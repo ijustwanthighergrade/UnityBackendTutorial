@@ -17,7 +17,7 @@
     }
     //echo "Connected successfully";
     $thismemdata=array();
-    $sql = "SELECT MemId, Email, Password FROM member WHERE Email ='". $login_user."'";
+    $sql = "SELECT MemId, Email, Password FROM member WHERE Email ='". $login_user."' and Status='1'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
