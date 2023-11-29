@@ -74,15 +74,10 @@
             $jsonData = json_encode($data);
             header('Content-Type: application/json');
             echo $jsonData;
-            // $jsonData = json_encode($TagNames);
-            // header('Content-Type: application/json');
-            // echo $jsonData;
 
         }else {
             echo "cannot find relationship<br>";
         }
-        // print_r($TagIds);
-        // echo "<br>";
 
     } else {
         echo "cannot find targetid<br>";

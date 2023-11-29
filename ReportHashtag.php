@@ -7,6 +7,7 @@
     //variables user input
     $user=$_POST["username"];
     $addedhashtag=$_POST["addedhashtag"];
+    $detected_targetname=$_POST["imagetarget"];
     // $user="abc";
     // $detected_targetname="tictagtoe";
     // $addedhashtag="search";
@@ -22,19 +23,24 @@
     }
     else{
         //現在時間
-
-        $now = date('Y-m-d H:i:s');
-        $createTagid = "F".date('mdHis');
-        $sql = "INSERT INTO `feedback`(`DataId`, `MemId`, `TagId`, `Content`, `CreateTime`) VALUES ('".$createTagid."','".$user
-        ."','".$addedhashtag."','不適當的tag','".$now."')";
-     
-        if ($conn->query($sql) === TRUE) {
-            echo "成功回報";
+        $sql = "SELECT TargetId FROM img_target WHERE TargetName ='". $detected_targetname."'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $targetId = $row["TargetId"];
+            }
+            $now = date('Y-m-d H:i:s');
+            $createTagid = "F".date('mdHis');
+            $sql = "INSERT INTO `feedback`(`DataId`, `MemId`, `TagId`, `Content`, `CreateTime`,`TargetId`,`Type`) VALUES ('".$createTagid."','".$user
+            ."','".$addedhashtag."','不適當的tag','".$now."','".$targetId."','1')";
+        
+            if ($conn->query($sql) === TRUE) {
+                echo "Report success";
+            }
+            else{
+                echo "Report error" ;
+            }
         }
-        else{
-            echo "回報錯誤" ;
-        }
-
     }
    
       
